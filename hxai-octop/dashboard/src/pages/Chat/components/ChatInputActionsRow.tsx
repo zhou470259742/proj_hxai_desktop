@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { navAllowed } from "../../../utils/permissions";
 import {
   Send,
   Square,
@@ -244,6 +246,7 @@ export default function ChatInputActionsRow({
   onCancel,
   onSubmit,
 }: ChatInputActionsRowProps) {
+  const navUser = useCurrentUser();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const remoteManaged = Boolean(agentId?.startsWith("bridge:"));
@@ -665,6 +668,7 @@ export default function ChatInputActionsRow({
             ) : null}
           </div>
           <div className={styles.modelMenuDivider} />
+          {(remoteManaged || navAllowed(navUser, "models")) && (
           <button
             type="button"
             className={cx(
@@ -691,6 +695,7 @@ export default function ChatInputActionsRow({
                 : t("chat.modelPickerManage")}
             </span>
           </button>
+          )}
         </div>
       )}
       {reasoningMenu}
