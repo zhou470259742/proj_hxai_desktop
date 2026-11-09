@@ -1,0 +1,50 @@
+[
+  {
+    "id": "error.unauthorized",
+    "translation": "未登录或登录已过期"
+  },
+  {
+    "id": "error.forbidden",
+    "translation": "没有权限执行该操作"
+  },
+  {
+    "id": "error.not_found",
+    "translation": "资源不存在"
+  },
+  {
+    "id": "error.internal",
+    "translation": "服务器内部错误"
+  },
+  {
+    "id": "error.invalid_credentials",
+    "translation": "账号或密码不正确"
+  },
+  {
+    "id": "error.too_many_attempts",
+    "translation": "登录失败次数过多，请 {{.RetryAfter}} 秒后再试"
+  },
+  {
+    "id": "error.invalid_grant",
+    "translation": "登录码无效，请重新生成"
+  },
+  {
+    "id": "error.grant_consumed",
+    "translation": "登录码已被使用，请重新生成"
+  },
+  {
+    "id": "error.grant_expired",
+    "translation": "登录码已过期，请重新生成"
+  },
+  {
+    "id": "error.user_disabled",
+    "translation": "该账号已被停用，请联系管理员"
+  },
+  {
+    "id": "error.csrf_origin_mismatch",
+    "translation": "跨站写操作被拒绝"
+  },
+  {
+    "id": "error.payload_too_large",
+    "translation": "请求体过大"
+  }
+]

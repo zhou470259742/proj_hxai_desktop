@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>管理控制台 · HX AI 工作台</title>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c00000'/%3E%3Ctext x='16' y='22' font-size='17' font-family='sans-serif' font-weight='700' fill='%23fff' text-anchor='middle'%3E%E5%92%8C%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+<!-- ============================ 登录 ============================ -->
+<div class="login" id="login" hidden>
+  <div class="login-brand">
+    <div class="brand-lockup">
+      <div class="brand-mark">和</div>
+      <div>
+        <div class="brand-name">HX AI 工作台</div>
+        <div class="brand-sub">管理控制面 · Control Plane</div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="login-headline">把专家、插件和技能<br /><em>一次配好，全员生效</em></h2>
+      <p class="login-desc">
+        桌面端不再各自配置。管理员在这里定义专家角色，绑定可用插件与技能，
+        客户端登录后自动拉取，员工离职即时失效。
+      </p>
+      <div class="login-points">
+        <div class="login-point">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>能力收窄即安全边界</b>：每个专家只能碰配给它的插件，模型再强也越不出去</span>
+        </div>
+        <div class="login-point">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>插件走登录授权</b>：对接业务系统统一用 MCP + OAuth 2.1，不散落账号密码</span>
+        </div>
+        <div class="login-point">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
+          <span><b>下发有版本</b>：清单带内容哈希，改了什么、谁改的，审计里查得到</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-foot">© 2026 HX · 信息中心</div>
+  </div>
+
+  <div class="login-form-wrap">
+    <form class="login-form" id="loginForm" autocomplete="on">
+      <h1>登录管理控制台</h1>
+      <p class="sub">使用组织账号登录，配置将同步至所有已安装的桌面客户端</p>
+      <div class="login-error" id="loginError" hidden></div>
+      <div class="field">
+        <label for="username">账号</label>
+        <input class="input" id="username" name="username" placeholder="用户名或邮箱" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="password">密码</label>
+        <input class="input" id="password" name="password" type="password" placeholder="请输入密码" autocomplete="current-password" required />
+      </div>
+      <button class="btn btn-primary btn-block" type="submit" id="loginBtn">登 录</button>
+      <div class="login-demo">
+        演示账号 <code>admin</code> / <code>Admin@12345</code><br />
+        权限区分：<code>zhangmin</code> 为发布者，<code>lijie</code> 为普通成员
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ====================== 桌面客户端授权（desktopAuth=1） ====================== -->
+<div class="handoff" id="handoff" hidden>
+  <div class="handoff-card">
+    <div class="handoff-brand">
+      <div class="brand-mark">和</div>
+      <div>
+        <div class="brand-name" style="color:#111827">HX AI 工作台</div>
+        <div class="brand-sub" style="color:#8a92a1">桌面客户端授权</div>
+      </div>
+      <span class="pill green no-dot" id="handoffConn" style="margin-left:auto">已连接控制面</span>
+    </div>
+    <div id="handoffBody"></div>
+    <div class="handoff-foot" id="handoffFoot"></div>
+  </div>
+</div>
+
+<!-- ============================ 应用 ============================ -->
+<div class="app" id="app" hidden>
+  <aside class="sidebar">
+    <div class="side-brand">
+      <div class="brand-mark">和</div>
+      <div>
+        <div class="name">AI 工作台</div>
+        <div class="sub">管理控制面</div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">运营</div>
+      <div class="nav-item" data-view="overview"><span data-icon="grid"></span>概览</div>
+      <div class="nav-item" data-view="experts"><span data-icon="users"></span>专家管理<span class="nav-count" id="countExperts">–</span></div>
+      <div class="nav-item" data-view="plugins"><span data-icon="plug"></span>插件管理<span class="nav-count" id="countPlugins">–</span></div>
+      <div class="nav-item" data-view="skills"><span data-icon="sparkles"></span>技能商城<span class="nav-count" id="countSkills">–</span></div>
+      <div class="nav-item" data-view="apps"><span data-icon="grid"></span>应用管理</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">治理</div>
+      <div class="nav-item" data-view="users"><span data-icon="shield"></span>用户与权限</div>
+      <div class="nav-item" data-view="audit"><span data-icon="list"></span>审计日志</div>
+      <div class="nav-item" data-view="instances"><span data-icon="cpu"></span>实例管理</div>
+      <div class="nav-item" data-view="client-config"><span data-icon="send"></span>客户端配置</div>
+    </div>
+
+    <div class="side-foot">
+      <div class="side-user">
+        <div class="avatar" id="sideAvatar">–</div>
+        <div class="who" id="sideWho">–<span id="sideRole">–</span></div>
+        <div class="side-logout" id="logoutBtn" title="退出登录"><span data-icon="logout"></span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h2 id="pageTitle">概览</h2>
+      <span class="crumb" id="pageCrumb"></span>
+      <div class="topbar-right">
+        <div class="version-chip" id="versionChip" title="点击查看客户端配置">
+          <span class="dot"></span><span id="versionText">–</span>
+        </div>
+        <button class="btn btn-sm" id="refreshBtn"><span data-icon="refresh"></span>刷新</button>
+      </div>
+    </header>
+    <div class="content"><div class="content-inner" id="view"></div></div>
+  </main>
+</div>
+
+<!-- 抽屉 -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div>
+      <h3 id="drawerTitle">标题</h3>
+      <div class="sub" id="drawerSub"></div>
+    </div>
+    <div class="drawer-close" id="drawerClose"><span data-icon="x"></span></div>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</aside>
+
+<div class="toasts" id="toasts"></div>
+<div id="modalRoot"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "bind_host": "127.0.0.1",
+  "port": 8099,
+  "log_level": "info",
+  "access_token_ttl_seconds": 86400,
+  "login_max_attempts": 5,
+  "login_lockout_seconds": 900,
+  "cors_origins": [],
+  "default_timezone": "Asia/Shanghai",
+  "enable_dashboard": true,
+  "enable_api_docs": false,
+  "history_v2_enabled": false,
+  "require_setup_password": true,
+  "database": {
+    "driver": "sqlite",
+    "sqlite_path": "octop.db",
+    "host": "127.0.0.1",
+    "port": 5432,
+    "database": "octop",
+    "user": "octop"
+  },
+  "tls": {
+    "enabled": false,
+    "mode": "",
+    "domains": [],
+    "cert_file": "",
+    "key_file": "",
+    "issued_at": "",
+    "expires_at": "",
+    "acme_staging": false,
+    "http_port": 80
+  },
+  "backup": {
+    "auto_enabled": false,
+    "schedule": "cron:0 4 * * *",
+    "retention_count": 7,
+    "include_config": true,
+    "include_workspaces": true,
+    "include_skill_packages": true,
+    "include_plugins": true,
+    "include_knowledge": true,
+    "include_chats": false
+  },
+  "capabilities": {
+    "mobile": {
+      "enabled": true,
+      "backend": "physical",
+      "probed_at": "2026-11-07T01:42:14Z",
+      "reason": ""
+    }
+  },
+  "max_upload_mb": 100,
+  "browser_idle_timeout_minutes": 30
+}

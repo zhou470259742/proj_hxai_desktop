@@ -1,0 +1,50 @@
+[
+  {
+    "id": "error.unauthorized",
+    "translation": "Not signed in or the session has expired"
+  },
+  {
+    "id": "error.forbidden",
+    "translation": "You do not have permission to perform this action"
+  },
+  {
+    "id": "error.not_found",
+    "translation": "Resource not found"
+  },
+  {
+    "id": "error.internal",
+    "translation": "Internal server error"
+  },
+  {
+    "id": "error.invalid_credentials",
+    "translation": "Incorrect username or password"
+  },
+  {
+    "id": "error.too_many_attempts",
+    "translation": "Too many failed sign-in attempts. Try again in {{.RetryAfter}} seconds"
+  },
+  {
+    "id": "error.invalid_grant",
+    "translation": "Invalid sign-in code. Generate a new one"
+  },
+  {
+    "id": "error.grant_consumed",
+    "translation": "This sign-in code has already been used. Generate a new one"
+  },
+  {
+    "id": "error.grant_expired",
+    "translation": "The sign-in code has expired. Generate a new one"
+  },
+  {
+    "id": "error.user_disabled",
+    "translation": "This account is disabled. Contact your administrator"
+  },
+  {
+    "id": "error.csrf_origin_mismatch",
+    "translation": "Cross-site write request rejected"
+  },
+  {
+    "id": "error.payload_too_large",
+    "translation": "Request body too large"
+  }
+]

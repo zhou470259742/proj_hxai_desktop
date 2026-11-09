@@ -1,0 +1,17 @@
+{
+  "name": "hx-control-plane",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "和信 AI 工作台 · 管理控制面（专家 / 插件 / 技能 / 下发）",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "node --watch src/server.mjs",
+    "seed": "node src/seed.mjs --reset",
+    "bootstrap-desktop": "node scripts/bootstrap-desktop.mjs"
+  },
+  "dependencies": {}
+}

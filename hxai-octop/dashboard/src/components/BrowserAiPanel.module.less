@@ -1,0 +1,213 @@
+// ── Panel root ─────────────────────────────────────────────────────────────
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  padding: 12px 16px 16px;
+  background: transparent;
+  overflow: hidden;
+}
+
+// ── Context section ────────────────────────────────────────────────────────
+
+.contextSection {
+  flex-shrink: 0;
+  padding: 9px 10px 10px;
+  background: var(--fn-bg-secondary);
+  border-radius: 10px;
+}
+
+.contextGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 8px;
+  font-size: 11px;
+}
+
+.expertSelectRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.expertSelectRow > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.emptyAgentPicker {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.contextLabel {
+  color: var(--fn-text-tertiary);
+  white-space: nowrap;
+}
+
+.contextValue {
+  color: var(--fn-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+
+// ── Message list ──────────────────────────────────────────────────────────
+
+.messages {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.messagesLoading,
+.messagesError {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-size: 12px;
+  color: var(--fn-text-tertiary);
+}
+
+.messagesError {
+  color: var(--fn-color-error, #ef4444);
+  text-align: center;
+}
+
+.messages :global(.messageList) {
+  padding: 8px 0 12px;
+}
+
+.messages :global(.messageListInner) {
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 8px;
+}
+
+// ── Empty / gate state (no agent or no browser session) ──────────────────
+
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fn-text-primary);
+}
+
+.emptyDesc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--fn-text-tertiary);
+}
+
+.startBrowserBtn {
+  margin-top: 8px;
+}
+
+.composer {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--fn-border-secondary);
+}
+
+.composerActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.composerLead {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+}
+
+.hint {
+  min-width: 0;
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+// ── Recording indicator ─────────────────────────────────────────────────
+
+.recordingTag {
+  margin-left: 8px;
+  font-size: 11px;
+}
+
+// ── Action buttons (record stop / replay) in send bar ──────────────────
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid var(--fn-border-primary, rgba(0, 0, 0, 0.12));
+  background: var(--fn-bg-secondary);
+  color: var(--fn-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--fn-bg-tertiary);
+    color: var(--fn-text-primary);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &.actionBtnDanger {
+    border-color: var(--fn-color-error, #ef4444);
+    color: var(--fn-color-error, #ef4444);
+
+    &:hover:not(:disabled) {
+      background: rgba(239, 68, 68, 0.08);
+    }
+  }
+}
+
+.spinIcon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
